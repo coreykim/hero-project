@@ -1,0 +1,107 @@
+#wrapper {
+	min-width: 900px;
+	text-align: center;
+	margin: auto;
+	font-family: Arial;
+}
+.side-panel, .center-panel {
+	display: inline-block;
+	vertical-align: top;
+	margin: 1px -3px 0 0;
+	box-shadow: 0 0 0 1px tomato;
+}
+.side-panel {
+	max-width: 31%;
+	height: 750px;
+	font-size: 16px;
+}
+#playerportrait, #enemyportrait {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+#playerpaneltext, #enemypaneltext {
+	color: #ffffff;
+	background-color: #454545;
+}
+
+.center-panel {
+	box-sizing: border-box;
+	max-width: 38%;
+	height: 750px;
+	padding: 0px 10px;
+}
+
+#icon-container00, #icon-container01, #icon-container02, 
+#icon-container10, #icon-container11, #icon-container12, 
+#icon-container20, #icon-container21, #icon-container22, 
+#icon-container30, #icon-container31, #icon-container32 {
+	display: inline-block;
+	outline-style: solid;
+	outline-color: red;
+	outline-width: 0px;
+}
+#icon00, #icon01, #icon02, 
+#icon10, #icon11, #icon12, 
+#icon20, #icon21, #icon22, 
+#icon30, #icon31, #icon32 {
+	width: 100px;
+	height: auto;
+	display: block;
+}
+
+#hp00, #hp01, #hp02, 
+#hp10, #hp11, #hp12, 
+#hp20, #hp21, #hp22, 
+#hp30, #hp31, #hp32, 
+#dp00, #dp01, #dp02, 
+#dp10, #dp11, #dp12, 
+#dp20, #dp21, #dp22, 
+#dp30, #dp31, #dp32, 
+#ap00, #ap01, #ap02, 
+#ap10, #ap11, #ap12, 
+#ap20, #ap21, #ap22, 
+#ap30, #ap31, #ap32 {
+	height: 4px;
+	width: 0px;
+	vertical-align: top;
+}
+#hp00, #hp01, #hp02, 
+#hp10, #hp11, #hp12, 
+#hp20, #hp21, #hp22, 
+#hp30, #hp31, #hp32 {
+	background-color: green;
+}
+#dp20, #dp21, #dp22, 
+#dp30, #dp31, #dp32, 
+#dp00, #dp01, #dp02, 
+#dp10, #dp11, #dp12 {
+	background-color: orange;
+}
+#ap20, #ap21, #ap22, 
+#ap30, #ap31, #ap32, 
+#ap00, #ap01, #ap02, 
+#ap10, #ap11, #ap12 {
+	background-color: yellow;
+}
+.btn {
+  margin: auto;
+  width: 200px;
+  background: #454545;
+  background-image: -webkit-linear-gradient(top, #454545, #a8a8a8);
+  background-image: -moz-linear-gradient(top, #454545, #a8a8a8);
+  background-image: -ms-linear-gradient(top, #454545, #a8a8a8);
+  background-image: -o-linear-gradient(top, #454545, #a8a8a8);
+  background-image: linear-gradient(to bottom, #454545, #a8a8a8);
+  color: #ffffff;
+  font-size: 16px;
+  padding: 5px 0px 5px 0px;
+  border: solid #666666 1px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  font-weight: bold;
+  border: solid #e0e0e0 1px;
+  text-decoration: none;
+}
