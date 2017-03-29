@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hero Project</title>
+<link rel="stylesheet" type="text/css" href="battle.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="battle.js"></script>
+</head>
+<body onload = "updateDisplay();">
+<div id="wrapper">
+	<div class="side-panel">
+		<img id="playerportrait" src="images/400x600/empty.png">
+		<p id="playerpaneltext"></p>
+	</div>
+	<div class="center-panel">
+		<div>
+			<div id="icon-container00">
+				<img id="icon00" src="images/100x100/empty.png"
+					onclick="selectNew(0, 0)">
+				<div id="hp00"></div>
+			</div>
+			<div id="icon-container01">
+				<img id="icon01" src="images/100x100/empty.png"
+					onclick="selectNew(0, 1)">
+				<div id="hp01"></div>
+			</div>
+			<div id="icon-container02">
+				<img id="icon02" src="images/100x100/empty.png"
+					onclick="selectNew(0, 2)">
+				<div id="hp02"></div>
+			</div>
+		</div>
+		<div>
+			<div id="icon-container10">
+				<img id="icon10" src="images/100x100/empty.png"
+					onclick="selectNew(1, 0)">
+				<div id="hp10"></div>
+			</div>
+			<div id="icon-container11">
+				<img id="icon11" src="images/100x100/empty.png"
+					onclick="selectNew(1, 1)">
+				<div id="hp11"></div>
+			</div>
+			<div id="icon-container12">
+				<img id="icon12" src="images/100x100/empty.png"
+					onclick="selectNew(1, 2)">
+				<div id="hp12"></div>
+			</div>
+		</div>
+		<p style="height:50px"></p>
+		<div>
+			<div id="icon-container20">
+				<img id="icon20" src="images/100x100/empty.png"
+					onclick="selectNew(2, 0)">
+				<div id="hp20"></div>
+			</div>
+			<div id="icon-container21">
+				<img id="icon21" src="images/100x100/empty.png"
+					onclick="selectNew(2, 1)">
+				<div id="hp21"></div>
+			</div>
+			<div id="icon-container22">
+				<img id="icon22" src="images/100x100/empty.png"
+					onclick="selectNew(2, 2)">
+				<div id="hp22"></div>
+			</div>
+		</div>
+		<div>
+			<div id="icon-container30">
+				<img id="icon30" src="images/100x100/empty.png"
+					onclick="selectNew(3, 0)">
+				<div id="hp30"></div>
+			</div>
+			<div id="icon-container31">
+				<img id="icon31" src="images/100x100/empty.png"
+					onclick="selectNew(3, 1)">
+				<div id="hp31"></div>
+			</div>
+			<div id="icon-container32">
+				<img id="icon32" src="images/100x100/empty.png"
+					onclick="selectNew(3, 2)">
+				<div id="hp32"></div>
+			</div>
+		</div>
+		<button id="next-turn" onclick="nextTurn()">Next</button>
+	</div>
+	<div class="side-panel">
+		<img id="enemyportrait" src="images/400x600/empty.png">
+		<p id="enemypaneltext"></p>
+	</div>
+</div>
+
+
+</body>
+</html>

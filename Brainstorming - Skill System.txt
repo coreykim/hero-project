@@ -1,0 +1,56 @@
+Ultimate: Alt Heavy Exceed. Inflicts Exhausted.
+Exhausted: Self-inflicted debuff that occurs after using an ultimate. Spirit set to 0, -50% HP, all stats -10.
+Debuff: Debuff attempts set a countdown. Each time the same debuff is used, it's either set to the lowest countdown, or the countdown is reduced by one.
+
+
+Back and forth before taking damage
+
+Momentum Points, or MP
+MP is depleted when attacked
+When  your MP reaches 0, you are stunned for a turn, cannot dodge, and take more damage.
+Support units regenerate 10 MP per turn.
+Max MP is same as max HP.
+
+
+Goes down when attacked
+When MP > 0, reduces HP damage taken to a tiny fraction.
+When MP = 0, you take much more HP damage.
+Evasion is impossible at MP = 0!
+Regain MP with Basic attacks
+Spend MP with Heavy attacks
+
+If MP>0
+	If Evade
+		MP -= MPdam*Attack/Defense
+	Else
+		(Attack/Defense*BasePower - Guard)/10
+If MP=-
+	(Attack/Defense*BasePower - Guard)/10*3
+
+MPdam = 10 for Basic and Light. Heavy, Alt, and Special skills get +10.
+
+Close/Far
+Basic/Light/Heavy/Defense
+Normal/Alt/Special/AltSpecial
+Passive
+
+=====
+Basic
+=====
+	No special
+	Grants access to a more powerful set of skills next turn
+	Stage 1 Basic is always your weapon attack
+
+
+=====
+Light
+=====
+	Builds +1 special
+	Safe to use
+
+=====
+Heavy
+=====
+	Build +3 special
+	Takes 2 turns
+	Disables defense for 1 turn

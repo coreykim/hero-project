@@ -1,0 +1,5 @@
+Julius: 78HP 70BP 6S | 100/80
+Natalie: 18HP 90BP 0S | 80/120 BlP2
+
+Sena: 58HP 40BP 0S | 120/70 KB2 Imm2 Rev1
+Renaud: 70HP 30BP 6S | 110/50

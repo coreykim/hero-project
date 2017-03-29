@@ -1,0 +1,119 @@
+EXAMPLE SKILLS
+
+===
+JULIUS
+===
+HP: 100
+Attack: 100
+Defense: 80
+Armor: 0
+Hit: 5
+Evade: 0
+Cooldown: 6
+
+CL - Telekinetic Push - 40 BP - Knockback(3).
+CH - Binding Chains - 80 BP - Immobilize(2).
+RL - Magic Missile - 50 BP - +5 Hit.
+RH - Gravity's Union - 70 BP - Hits support. Immobilize(3). Lasts 2 turns.
+RHS - Blade Pact - Increases main unit's attack by 50% for 3 turns.
+
+===
+NATALIE
+===
+HP: 80
+Attack: 80
+Defense: 120
+Armor: 5
+Hit: 3
+Evade: 2
+Cooldown: 9
+
+D - Guard - +10 Armor
+DS - Perfect Guard - +150 Armor
+CH - Tempest - 80 BP - Hits support. +5 Hit. Knockback(2).
+RL - Piercing Rush - 30 BP - Move in front of target.
+RH - Javelin - 70 BP
+
+===
+SENA
+===
+HP: 90
+Attack: 120
+Defense: 70
+Armor: 0
+Hit: 6
+Evade: 8
+Cooldown: 9
+
+D - Ghost Hunt - +3 Evade. On successful evade of a close attack, 30 BP counter attack.
+DS - Phantom Pain - Resist 50%, reflect 50%.
+CL - Kick - 20 BP - Stun(4).
+RH - Red Whirlwind - 80 BP
+P - Revenge - +5% Attack and +5 BP for every 25% health missing.
+
+===
+RENAUD
+===
+HP: 70
+Attack: 110
+Defense: 50
+Armor: 0
+Hit: 8
+Evade: 10
+Cooldown: 6
+D - Air Step - +3 Evade. Next turn movement is free.
+CL - Double Cut - 25 BP - Hits twice.
+CH - Backstab - 120 BP - Interruptible. Hits the support unit instead, if available.
+CHS - Quick Kill - 180 BP - Requires Stealth. Instant kill on targets with level lower than user level if target HP is brought below 50%.
+RL - Flicker - Move in front of target and gain another turn.
+RH - Stealth - Grants Stealth mode for 3 turns. Stealth is cancelled if user has a support unit in the same lane. User becomes an invalid target.
+
+===
+LENA
+===
+HP: 70
+Attack: 130
+Defense: 40
+Armor: 0
+Hit: 4
+Evade: 3
+Cooldown: 8
+D - Magical Evasion - +4 Evade.
+DS - Frigid Tracks - If targeted by a Light attack, the attack is delayed for 1 turn. Freeze(2).
+CH - Whack - 20 BP - -5 Hit. Hits three times. Knockback(1).
+RL - Firebolt - 15 BP - Hits three times. Burn(3).
+P - Spellwalk - After movement, if user is in a support position, gain an extra turn.
+
+===
+ROSE
+===
+HP: 100
+Attack: 80
+Defense: 100
+Armor: 10
+Hit: 2
+Evade: 0
+Cooldown: 9
+
+D - Backflip - +3 Evade. Next turn, backwards movement is free.
+CLS - Overhead Leap - 25 BP - Hits 3 times. Immobilize(1).
+CH - Earthshatter - 80 BP - Hits support unit. Knockback(2).
+RL - Charging Strike - 30 BP - Hits two times. Stun(5). Moves in front of target.
+RLS - Guardian's Roar - All party members gain +20% defense for 3 turns.
+P - Berserker - When HP is less than 5%, +30% attack, -10% defense.
+
+
+Snap Punch: Close Light Normal
+Gatling Jab: Close Light Special
+Corkscrew Cross: Close Heavy Normal
+Phantom Upper: Close Heavy Special
+Sway: Close Defend Normal
+Flicker: Ranged Light Normal
+
+Telekinetic Push: Close Light Normal
+Concentrate: Close Heavy Normal
+Blink: Close Defend Normal
+Summon Warrior Sprite: Ranged Light Normal
+Summon Mage Sprite: Ranged Light Normal Alt
+Promote Warrior Sprite: Ranged Light Special
+Promote Mage Sprite: Ranged Light Special Alt

@@ -1,0 +1,5 @@
+HTML page is empty
+
+Game.Init() creates the entire page and initializes variables
+	Runs Game.Field.Init() and Game.Draw() within itself
+Game.Field.Init() initializes the game battlefield
