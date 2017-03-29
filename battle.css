@@ -2,7 +2,6 @@
 	min-width: 900px;
 	text-align: center;
 	margin: auto;
-	font-family: Arial;
 }
 .side-panel, .center-panel {
 	display: inline-block;
