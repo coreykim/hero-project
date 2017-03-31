@@ -28,23 +28,20 @@ var Game={};
 Game.Launch=function(){
 	Game.version = 0.001;
 	Game.page={};
-	Game.page.centerpanel = "<div class='center-panel'>";
 	Game.page.playerpanel = 
-		"<div class='side-panel'>" + 
-		"<img id='playerportrait' src='images/400x600/empty.png'>" + 
-		"<div id='playerpaneltext'></div></div>"
-	Game.page.enemypanel =
-		"<div class='side-panel'>" + 
-		"<img id='enemyportrait' src='images/400x600/empty.png'>" + 
-		"<div id='enemypaneltext'></div></div>"
+		"<div id='player-panel'>" + 
+		"<img id='player-portrait' src='images/400x600/empty.png'>" + 
+		"<div id='player-info'></div>" +
+		"<div id='player-output'></div></div>"
+	Game.page.centerpanel = "<div id='center-panel'><div id='field'>";
 	for (var i = 3; i > -1; i--){
 		Game.page.centerpanel += "<div>";
 		for (j = 0; j < 3; j++){
 			id = i.toString() + j.toString();
 			Game.page.centerpanel +=
 				"<div id='icon-container" + id + "'>" +
-				"<img id='icon" + id + "' src='images/100x100/empty.png'" +
-				"onclick='Game.clickField(" + i + ", " + j + ")'>" +
+				"<img id='icon" + id + "' src='images/100x100/empty.png'>" +
+				//"onclick='Game.clickField(" + i + ", " + j + ")'>" +
 				"<div id='hp" + id + "'></div></div>"
 		}
 		Game.page.centerpanel += "</div>";
@@ -52,7 +49,12 @@ Game.Launch=function(){
 			Game.page.centerpanel += "<div style='height:20px'></div>"
 		}
 	};
-	Game.page.centerpanel += "</div>";
+	Game.page.centerpanel += "</div><div id='action'></div></div>";
+	Game.page.enemypanel =
+		"<div id='enemy-panel'>" + 
+		"<img id='enemy-portrait' src='images/400x600/empty.png'>" + 
+		"<div id='enemy-info'></div>" +
+		"<div id='enemy-output'></div></div>"
 	el("wrapper").innerHTML =
 		Game.page.playerpanel + "\r" + 
 		Game.page.centerpanel + "\r" +
@@ -87,6 +89,9 @@ Game.Launch=function(){
 		this.PreparedSkill = "";
 		this.KO = false;
 		this.stage = 0;
+		this.use = function(skill) {
+			return skill.use(this);
+		}
 		this.enterField = function(i, j) {
 			this.HP = this.max_HP;
 			this.Special = this.Cooldown;
@@ -120,14 +125,18 @@ Game.Launch=function(){
 			return result;
 		}
 		this.changePosition = function(i, j) {
-			swap = Game.field[i][j]
+			var target = Game.field[i][j]
+			var nowi = this.i;
+			var nowj = this.j;
 			Game.field[i][j] = this;
-			Game.field[this.i][this.j] = swap;
+			Game.field[nowi][nowj] = target;
 			this.i = i;
 			this.j = j;
+			target.i = nowi;
+			target.j = nowj;
 		}
 		this.isValidTarget = function() {
-			if (this.name == "Empty" || this.KO) {
+			if (this.image_id == "empty.png") {
 				return false;
 			} else {
 				return true;
@@ -171,6 +180,8 @@ Game.Launch=function(){
 		this.name = "Template";
 		this.id = "template";
 		this.passive = false;
+		this.target = "auto";
+		//"adjacent"
 		this.type = 0;
 		//0 - Basic
 		//1 - Light
@@ -201,12 +212,19 @@ Game.Launch=function(){
 			dam = dam * this.hitcount;
 			dam = Math.max(0, Math.ceil(dam));
 			target.HP -= dam;
-			console.log("Hit for " + dam + " damage!");
+			return(dam + " damage");
 		};
 		this.use = function(user){
 			var target = user.getTarget();
-			if (this.hitRoll(user, target)){this.damRoll(user, target)}
+			var output = ["", ""];
+			output[0] = user.name + " uses " + this.name;
+			if (this.hitRoll(user, target)){
+				output[1] = this.damRoll(user, target);
+			} else {
+				output[1] = "Evaded!";
+			}
 			if (this.splash){}
+			return output;
 		};
 	}
 	Game.Skill.Create=function(properties) {
@@ -243,6 +261,17 @@ Game.Launch=function(){
 			Game.Effect[effect.id] = effect;
 		}
 	}
+	Game.Skill.Create({
+		name: "Move",
+		id: "move",
+		target: "adjacent",
+		use: function(user){
+			var i = Game.Target.Queue[0].i;
+			var j = Game.Target.Queue[0].j;
+			user.changePosition(i,j);
+			return ["", ""]
+		}
+	});
 	Game.Skill.Create({
 		name: "Stab",
 		id: "knifebasic",
@@ -341,65 +370,131 @@ BATTLE
 =======================================================================================*/
 Game.Battle = function(){
 	var turn = true;
+	Game.ActingUnit = new Game.Unit();
+	Game.Target = {};
+	Game.Target.Reset = function(){
+		Game.Target.Mode = false;
+		Game.Target.Queue = [];
+		Game.Target.Skill = {};
+	}
+	Game.Target.Reset();
 	Game.field = [
-		[new Game.Unit(), new Game.Unit(), new Game.Unit()],
-		[new Game.Unit(), new Game.Unit(), new Game.Unit()],
-		[new Game.Unit(), new Game.Unit(), new Game.Unit()],
-		[new Game.Unit(), new Game.Unit(), new Game.Unit()]
+		[{}, {}, {}],
+		[{}, {}, {}],
+		[{}, {}, {}],
+		[{}, {}, {}]
 	];
 	var spawn = function(unit, i, j) {
 		Game.field[i][j] = unit;
 		unit.enterField(i, j);
+	}
+	for (var i=0; i<4; i++){
+		for (var j=0; j<3; j++){
+			spawn(new Game.Unit, i, j);
+		}
 	}
 	var displayPortrait = function(unit) {
 		var image_id = "images/400x600/" + unit.image_id;
 		var text = "<div>HP: " + unit.HP + "/" + unit.max_HP +
 			"</div><div>Special: " + unit.Special + "</div>";
 		if (unit.i<2){
-			if (turn){
-				var buttons = unit.returnCurrentSkills();
-				for (var i = 0; i<3; i++){
-					if (buttons[i]==""){
-						text += "<div class='btn'> - </div>"
-					} else {
-						var name = Game.Skill[buttons[i]].name;
-						var id = "&quot;" + Game.Skill[buttons[i]].id + "&quot;";
-						text += "<div class='btn' onclick='Game.clickSkill(" + 
-							unit.i + ", " + unit.j + ", " + id + ")'>" +
-							name + "</div>"
-					}
-				}
-				text += "<div class='btn'>Move</div>"
-			}
-			el("playerportrait").src = image_id;
-			el("playerpaneltext").innerHTML = text;
+			el("player-portrait").src = image_id;
+			el("player-info").innerHTML = text;
+			displayAction(unit);
 		} else {
-			el("enemyportrait").src = image_id
-			el("enemypaneltext").innerHTML = text;
+			el("enemy-portrait").src = image_id
+			el("enemy-info").innerHTML = text;
 		}
 	}
-	Game.clickField = function(i, j) {
+	var displayAction = function(unit){
+		if (unit.i<2 && turn){
+			Game.ActingUnit = unit;
+			el("action").innerHTML = "";
+			var buttons = unit.returnCurrentSkills();
+			for (var i = 0; i<3; i++){
+				if (buttons[i]==""){
+					el("action").innerHTML += "<div class='btn'> - </div>"
+				} else {
+					var name = Game.Skill[buttons[i]].name;
+					var id = Game.Skill[buttons[i]].id;
+					el("action").innerHTML += "<div class='btn' id='act-" + id +
+						"'>" + name + "</div>"
+				}
+			}
+			el("action").innerHTML += "<div class='btn' id='act-move'>Move</div>"
+		}
+	}
+	Game.clickField = function(e) {
+		if (e.target.parentNode.id.slice(0,-2)!="icon-container")return
+		var i = parseInt(e.target.parentNode.id.slice(-2, -1));
+		var j = parseInt(e.target.parentNode.id.slice(-1));
 		var unit = Game.field[i][j];
-		if (unit.name=="Empty"){return};
-		displayPortrait(unit);
+		if (Game.Target.Mode=="adjacent"){
+			var ai = Game.ActingUnit.i;
+			var aj = Game.ActingUnit.j;
+			var adji = Math.abs(i-ai)==1 && j==aj;
+			var adjj = Math.abs(j-aj)==1;
+			var adjacent = adji || adjj;
+			var sameside = (i<2 && ai<2)||(i>1 && ai>1);
+			if (adjacent && sameside){
+				Game.Target.Queue.push(unit);
+				Game.executeSkill(Game.ActingUnit, Game.Target.Skill);
+			} else {Game.Target.Reset()}
+		} else {
+			if (!unit.isValidTarget()){return};
+			el("player-output").innerHTML = "";
+			el("enemy-output").innerHTML = "";
+			displayPortrait(unit);
+			displayPortrait(unit.getTarget());
+		}
+	}
+	el("field").addEventListener("click", Game.clickField);
+	Game.clickSkill = function(e) {
+		var unit = Game.ActingUnit;
+		var skill = Game.Skill[e.target.id.slice(4)];
+		if (skill.target=="auto"){
+			Game.executeSkill(unit, skill);
+		} else {
+			Game.Target.Mode = skill.target;
+			Game.Target.Skill = skill;
+		}
+	}
+	Game.executeSkill = function(unit, skill) {
+		var data = unit.use(skill)
+		if (unit.i<2) {
+			var output = [el("player-output"), el("enemy-output")];
+		} else {
+			var output = [el("enemy-output"), el("player-output")];
+		}
+		output[0].innerHTML = "<br>" + data[0];
+		output[1].innerHTML = "<br>" + data[1];
 		displayPortrait(unit.getTarget());
+		Game.Target.Reset();
+		el("action").innerHTML = "";
+		el("player-panel").innerHTML =
+			"<img id='player-portrait' src='images/400x600/empty.png'>" + 
+			"<div id='player-info'></div>" +
+			"<div id='player-output'></div>"
+		el("enemy-panel").innerHTML =
+			"<img id='enemy-portrait' src='images/400x600/empty.png'>" + 
+			"<div id='enemy-info'></div>" +
+			"<div id='enemy-output'></div>"
+		drawField();
 	}
-	Game.clickSkill = function(i, j, skillname) {
-		var unit = Game.field[i][j];
-		console.log(unit.name + " uses " + Game.Skill[skillname].name + ".")
-		Game.Skill[skillname].use(unit)
-	}
-	var draw = function() {
+	el("action").addEventListener("click", Game.clickSkill);
+	var drawField = function() {
 		var max_width = 100;
 		for (var i = 0; i < 4; i++){
 			for (var j = 0; j < 3; j++){
-				el("icon"+i+j).src = 
-					"images/100x100/" + Game.field[i][j].image_id;
-				el("hp"+i+j).style =
-					"width:" +
-					Math.min(
-						Game.field[i][j].HP/Game.field[i][j].max_HP*max_width,
-						max_width).toFixed() + "px";
+				unit = Game.field[i][j];
+				el("icon"+i+j).src = "images/100x100/" + unit.image_id;
+				if (unit.isValidTarget()){
+					el("hp"+i+j).style = "width:" +
+						Math.min(unit.HP/unit.max_HP*max_width,
+							max_width).toFixed() + "px";
+				} else {
+					el("hp"+i+j).style = "width: 0"
+				}
 			}
 		}
 	}
@@ -407,5 +502,5 @@ Game.Battle = function(){
 	spawn(new Game.Renaud(), 1, 0);
 	spawn(new Game.Rose(), 2, 1);
 	spawn(new Game.Lena(), 3, 1);
-	draw();
+	drawField();
 }

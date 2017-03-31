@@ -2,29 +2,26 @@
 	min-width: 900px;
 	text-align: center;
 	margin: auto;
+	color: #ffffff;
+	background-color: #454545;
 }
-.side-panel, .center-panel {
+#player-panel, #enemy-panel, #center-panel {
 	display: inline-block;
 	vertical-align: top;
 	margin: 1px -3px 0 0;
-	box-shadow: 0 0 0 1px tomato;
+	box-shadow: 0 0 0 0px tomato;
 }
-.side-panel {
+#player-panel, #enemy-panel {
 	max-width: 31%;
-	height: 750px;
 	font-size: 16px;
 }
-#playerportrait, #enemyportrait {
+#player-portrait, #enemy-portrait {
 	display: block;
 	width: 100%;
 	height: auto;
 }
-#playerpaneltext, #enemypaneltext {
-	color: #ffffff;
-	background-color: #454545;
-}
 
-.center-panel {
+#center-panel {
 	box-sizing: border-box;
 	max-width: 38%;
 	height: 750px;
@@ -77,30 +74,30 @@
 #dp10, #dp11, #dp12 {
 	background-color: orange;
 }
-#ap20, #ap21, #ap22, 
-#ap30, #ap31, #ap32, 
-#ap00, #ap01, #ap02, 
-#ap10, #ap11, #ap12 {
-	background-color: yellow;
-}
 .btn {
   margin: auto;
-  width: 200px;
-  background: #454545;
-  background-image: -webkit-linear-gradient(top, #454545, #a8a8a8);
-  background-image: -moz-linear-gradient(top, #454545, #a8a8a8);
-  background-image: -ms-linear-gradient(top, #454545, #a8a8a8);
-  background-image: -o-linear-gradient(top, #454545, #a8a8a8);
-  background-image: linear-gradient(to bottom, #454545, #a8a8a8);
+  width: 300px;
+  background: #333333;
+  background-image: -webkit-linear-gradient(top, #333333, #7d7d7d);
+  background-image: -moz-linear-gradient(top, #333333, #7d7d7d);
+  background-image: -ms-linear-gradient(top, #333333, #7d7d7d);
+  background-image: -o-linear-gradient(top, #333333, #7d7d7d);
+  background-image: linear-gradient(to bottom, #333333, #7d7d7d);
   color: #ffffff;
   font-size: 16px;
   padding: 5px 0px 5px 0px;
   border: solid #666666 1px;
   text-decoration: none;
+  cursor:pointer;
 }
 
 .btn:hover {
+  background: #666666;
+  background-image: -webkit-linear-gradient(top, #666666, #999999);
+  background-image: -moz-linear-gradient(top, #666666, #999999);
+  background-image: -ms-linear-gradient(top, #666666, #999999);
+  background-image: -o-linear-gradient(top, #666666, #999999);
+  background-image: linear-gradient(to bottom, #666666, #999999);
   font-weight: bold;
-  border: solid #e0e0e0 1px;
   text-decoration: none;
 }
